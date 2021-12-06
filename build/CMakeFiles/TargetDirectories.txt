@@ -1,0 +1,4 @@
+/home/dima/src/new/ico/build/CMakeFiles/rebuild_cache.dir
+/home/dima/src/new/ico/build/CMakeFiles/IcoWidget.dir
+/home/dima/src/new/ico/build/CMakeFiles/edit_cache.dir
+/home/dima/src/new/ico/build/CMakeFiles/IcoWidget_autogen.dir

@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>forward.png</file>
+        <file>forward_small.png</file>
+        <file>mirr2.png</file>
+        <file>up_dn.png</file>
+        <file>att_n.png</file>
+        <file>que_n.png</file>
+        <file>ch_sw6.png</file>
+        <file>upd.png</file>
+    </qresource>
+    <qresource prefix="/translations">
+        <file>Lng_English.qm</file>
+        <file>Lng_Portugues.qm</file>
+        <file>Lng_Russian.qm</file>
+        <file>Lng_Ukrainian.qm</file>
+    </qresource>
+</RCC>

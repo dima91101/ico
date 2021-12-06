@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1335</width>
+    <height>986</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="5" colspan="2">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>54</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>54</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+border: 2px solid lightgray;
+margin-top: 5px;
+border-radius: 2px;
+
+}
+
+QGroupBox::title {
+    /*subcontrol-origin: margin;*/
+    subcontrol-position: top center; /* position at the top center */
+    padding-left:  5px;
+	padding-right: 5px;
+	margin-top: -15px;
+   
+}</string>
+      </property>
+      <property name="title">
+       <string notr="true">Language</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QComboBox" name="comboBoxLng">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>1</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="5" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>9</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTextBrowser" name="textBrowserConsole">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Ubuntu Mono</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+          <kerning>false</kerning>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::NoContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 0, 25);
+/*font: 10pt &quot;Sans&quot;;*/</string>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_Vector">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>261</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QGroupBox {
+border: 2px solid lightgray;
+margin-top: 5px;
+border-radius: 2px;
+
+}
+
+QGroupBox::title {
+    /*subcontrol-origin: margin;*/
+    subcontrol-position: top center; /* position at the top center */
+    padding-left:  5px;
+	padding-right: 5px;
+	margin-top: -15px;
+   
+}
+</string>
+        </property>
+        <property name="title">
+         <string>Direction</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButtonLoad_B">
+             <property name="toolTip">
+              <string>Load configur.file</string>
+             </property>
+             <property name="accessibleDescription">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Load conf. file</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_Fixator">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Base is installed and turned</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QRadioButton" name="radioButton_Back_F">
+              <property name="text">
+               <string>backward(by default)</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_Front_F">
+              <property name="text">
+               <string>forward</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QPushButton" name="pushButtonCalcCurs">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="accessibleDescription">
+              <string notr="true">S</string>
+             </property>
+             <property name="text">
+              <string>Encoder adjustment</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonSave_B">
+             <property name="toolTip">
+              <string>Save configur.file</string>
+             </property>
+             <property name="accessibleDescription">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Save conf. file</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_Angles">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>256</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>261</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QGroupBox {
+border: 2px solid lightgray;
+margin-top: 5px;
+border-radius: 2px;
+
+}
+
+QGroupBox::title {
+    /*subcontrol-origin: margin;*/
+    subcontrol-position: top center; /* position at the top center */
+    padding-left:  5px;
+	padding-right: 5px;
+	margin-top: -15px;
+   
+}
+</string>
+        </property>
+        <property name="title">
+         <string>Angles</string>
+        </property>
+        <widget class="QLabel" name="label_amin_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>140</y>
+           <width>41</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>min:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_ant2">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>30</y>
+           <width>96</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Antenna(.60)</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_amax_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>90</y>
+           <width>41</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>max:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_20">
+         <property name="geometry">
+          <rect>
+           <x>5</x>
+           <y>15</y>
+           <width>161</width>
+           <height>231</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>161</width>
+           <height>231</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>161</width>
+           <height>231</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../resources/res.qrc">:/res/mirr2.png</pixmap>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_up">
+         <property name="geometry">
+          <rect>
+           <x>135</x>
+           <y>90</y>
+           <width>66</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_dn">
+         <property name="geometry">
+          <rect>
+           <x>135</x>
+           <y>140</y>
+           <width>66</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhDigitsOnly</set>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButtonUP">
+         <property name="geometry">
+          <rect>
+           <x>235</x>
+           <y>90</y>
+           <width>46</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Take position</string>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/res.qrc">
+           <normaloff>:/res/forward_small.png</normaloff>:/res/forward_small.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButtonDN">
+         <property name="geometry">
+          <rect>
+           <x>235</x>
+           <y>140</y>
+           <width>46</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Take position</string>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/res.qrc">
+           <normaloff>:/res/forward_small.png</normaloff>:/res/forward_small.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_encod_5">
+         <property name="geometry">
+          <rect>
+           <x>235</x>
+           <y>65</y>
+           <width>86</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Encoder:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="Line" name="line">
+         <property name="geometry">
+          <rect>
+           <x>165</x>
+           <y>122</y>
+           <width>226</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButtonLoad_E">
+         <property name="geometry">
+          <rect>
+           <x>215</x>
+           <y>20</y>
+           <width>176</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Load configur.file</string>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Load conf. file</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButtonSave_E">
+         <property name="geometry">
+          <rect>
+           <x>215</x>
+           <y>220</y>
+           <width>176</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Save configur.file</string>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Save conf. file</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButtonResetAcc">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>220</y>
+           <width>46</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Reset dinamic extremum</string>
+         </property>
+         <property name="accessibleDescription">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/res.qrc">
+           <normaloff>:/res/upd.png</normaloff>:/res/upd.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_encod_6">
+         <property name="geometry">
+          <rect>
+           <x>215</x>
+           <y>185</y>
+           <width>46</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Ofset:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="spinBoxOfset">
+         <property name="geometry">
+          <rect>
+           <x>270</x>
+           <y>180</y>
+           <width>120</width>
+           <height>28</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="suffix">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>-32767</number>
+         </property>
+         <property name="maximum">
+          <number>32768</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="spin_up_major">
+         <property name="geometry">
+          <rect>
+           <x>310</x>
+           <y>90</y>
+           <width>80</width>
+           <height>28</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="suffix">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>32768</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="spin_dn_major">
+         <property name="geometry">
+          <rect>
+           <x>310</x>
+           <y>140</y>
+           <width>80</width>
+           <height>28</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="suffix">
+          <string/>
+         </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>32768</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+        <zorder>label_20</zorder>
+        <zorder>label_amin_4</zorder>
+        <zorder>label_ant2</zorder>
+        <zorder>label_amax_3</zorder>
+        <zorder>lineEdit_up</zorder>
+        <zorder>lineEdit_dn</zorder>
+        <zorder>pushButtonUP</zorder>
+        <zorder>pushButtonDN</zorder>
+        <zorder>label_encod_5</zorder>
+        <zorder>line</zorder>
+        <zorder>pushButtonLoad_E</zorder>
+        <zorder>pushButtonSave_E</zorder>
+        <zorder>pushButtonResetAcc</zorder>
+        <zorder>label_encod_6</zorder>
+        <zorder>spinBoxOfset</zorder>
+        <zorder>spin_up_major</zorder>
+        <zorder>spin_dn_major</zorder>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_20">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QGroupBox" name="groupBox_E">
+        <property name="minimumSize">
+         <size>
+          <width>280</width>
+          <height>54</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>54</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QGroupBox {
+border: 2px solid lightgray;
+margin-top: 5px;
+border-radius: 2px;
+
+}
+
+QGroupBox::title {
+    /*subcontrol-origin: margin;*/
+    subcontrol-position: top center; /* position at the top center */
+    padding-left:  5px;
+	padding-right: 5px;
+	margin-top: -15px;
+   
+}</string>
+        </property>
+        <property name="title">
+         <string>Encoder</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <property name="leftMargin">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="QRadioButton" name="radioButtonEps">
+           <property name="text">
+            <string> Ɛ  (Swinging)</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioButtonBet">
+           <property name="text">
+            <string>β  (Rotation)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>54</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>54</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QGroupBox {
+border: 2px solid lightgray;
+margin-top: 5px;
+border-radius: 2px;
+
+}
+
+QGroupBox::title {
+    /*subcontrol-origin: margin;*/
+    subcontrol-position: top center; /* position at the top center */
+    padding-left:  5px;
+	padding-right: 5px;
+	margin-top: -15px;
+   
+}</string>
+        </property>
+        <property name="title">
+         <string>Encoder connection </string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <property name="leftMargin">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="lineEditPath">
+           <property name="minimumSize">
+            <size>
+             <width>180</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>10000</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="inputMask">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string notr="true">/dev/ttyUSB0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButtonConnEnc">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Connect</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="../resources/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
