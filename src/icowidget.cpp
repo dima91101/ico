@@ -11,6 +11,8 @@ IcoWidget::IcoWidget(QWidget *parent):
     m_from(0.0),
     m_to(0.0),
     m_qPixMapBackground(QPixmap(m_diameterWidget,m_diameterWidget)),
+    m_qPixMapPicture(QPixmap("../resources/ch_sw6.png")),
+    m_qPixMapPictureText(QPixmap(m_diameterWidget,m_diameterWidget)),
     m_icoType(IT_DrawCircle),
     m_mainQwidget(parent)
 {
@@ -31,15 +33,24 @@ void IcoWidget::setPositionForSecondary(double inputVal, double valGradus){
 
 void IcoWidget::setIcoType(ICO_TYPE var){
     m_icoType = var;
-    update();
 }
 
 void IcoWidget::resizeEvent(QResizeEvent *e){
     this->resize(m_mainQwidget->width(),
                  m_mainQwidget->height());
     RecountCoordWidget();
-    UpdatePixmap();
-    update();
+
+    switch (m_icoType) {
+    case IT_DrawCircle :
+        UpdatePixmap();
+        break;
+    case IT_DrawComplex :
+        UpdatePixmap();
+        break;
+    case IT_DrawPicture :
+        UpdatePixmapPicture();
+        break;
+    }
 }
 
 void IcoWidget::paintEvent(QPaintEvent *){
@@ -66,8 +77,36 @@ void IcoWidget::UpdatePixmap(){
     DrawLayoutGradus(painter);
 }
 
+void IcoWidget::UpdatePixmapPicture(){
+    m_qPixMapPictureText = QPixmap(m_diameterWidget, m_diameterWidget);
+    m_qPixMapPictureText.fill(Qt::transparent);
+    QPainter painter(&m_qPixMapPictureText);
+
+    painter.setPen(QPen(QColor(215, 160, 2),0.5,Qt::SolidLine,Qt::RoundCap));
+//    painter.setRenderHint(QPainter::Antialiasing, true);
+    QBrush br_c(QColor(34, 26, 28),Qt::SolidPattern);
+    painter.setBrush(br_c);
+
+    QString textAlert(tr("For further work, the base should be installed on a folding azimuth and is locked!"));
+
+    //     For further work, the base should be installed on a folding azimuth and is locked!
+    //     Для дальнейшей работы антенная колонка должна быть зафиксирована!
+
+    QFontMetrics fm(this->font());
+    const int hf = fm.height();
+    const int wf = fm.width(textAlert);
+    const int wid = wf + 20;
+    QRect r((m_diameterWidget / 2 ) - (wid / 2) ,33,wid,hf+5);
+    painter.drawRoundedRect(r,12,12);
+    painter.setPen(QPen(QColor(255, 0, 0),1.0,Qt::SolidLine,Qt::RoundCap));
+    r.setX(r.x() + 10);
+    r.setY(r.y() + 1);
+    painter.drawText(r,textAlert);
+}
+
 void IcoWidget::DrawFullWidget(QPainter &painter){
     DrawPixmap(painter);
+
     DrawGridSectorAngle(painter);
     DrawArrow(painter);
     DrawCurrentNumAngle(painter);
@@ -208,33 +247,17 @@ void IcoWidget::DrawCurrentNumAngle(QPainter &painter){
 }
 
 void IcoWidget::DrawPicture(QPainter &painter){
-    QPixmap pixmap1("../resources/ch_sw6.png");
+    painter.drawPixmap(m_translateWidthToCenterWidget,
+                       m_translateHeightToCenterWidget,
+                       m_diameterWidget,
+                       m_diameterWidget,
+                       m_qPixMapPicture);
 
     painter.drawPixmap(m_translateWidthToCenterWidget,
                        m_translateHeightToCenterWidget,
                        m_diameterWidget,
                        m_diameterWidget,
-                       pixmap1);
-    painter.setPen(QPen(QColor(215, 160, 2),0.5,Qt::SolidLine,Qt::RoundCap));
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    QBrush br_c(QColor(34, 26, 28),Qt::SolidPattern);
-    painter.setBrush(br_c);
-
-    QString textAlert(tr("For further work, the base should be installed on a folding azimuth and is locked!"));
-
-    //     For further work, the base should be installed on a folding azimuth and is locked!
-    //     Для дальнейшей работы антенная колонка должна быть зафиксирована!
-
-    QFontMetrics fm(this->font());
-    const int hf = fm.height();
-    const int wf = fm.width(textAlert);
-    const int wid = wf + 20;
-    QRect r((m_diameterWidget / 2 + m_translateWidthToCenterWidget) - (wid / 2) ,33,wid,hf+5);
-    painter.drawRoundedRect(r,12,12);
-    painter.setPen(QPen(QColor(255, 0, 0),1.0,Qt::SolidLine,Qt::RoundCap));
-    r.setX(r.x() + 10);
-    r.setY(r.y() + 1);
-    painter.drawText(r,textAlert);
+                       m_qPixMapPictureText);
 }
 
 void IcoWidget::RecountCoordWidget(){

@@ -35,6 +35,7 @@ public:
 
 private:
     void UpdatePixmap();
+    void UpdatePixmapPicture();
     void DrawFullWidget(QPainter &painter);
     void DrawLayoutCircle(QPainter &painter);
     void DrawLayoutGradus(QPainter &painter);
@@ -58,6 +59,8 @@ private:
     int m_to;
 
     QPixmap m_qPixMapBackground;
+    QPixmap m_qPixMapPicture;
+    QPixmap m_qPixMapPictureText;
 
     ICO_TYPE m_icoType;
     QWidget *m_mainQwidget;
