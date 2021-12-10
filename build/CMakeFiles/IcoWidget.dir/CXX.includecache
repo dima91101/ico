@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 ../include/icowidget.h
+math.h
+-
 QWidget
 -
 QPainter
@@ -47,6 +49,8 @@ QtCore/qmetatype.h
 -
 
 /home/dima/src/new/ico/include/icowidget.h
+math.h
+-
 QWidget
 -
 QPainter

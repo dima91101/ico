@@ -10,6 +10,7 @@ IcoWidget::IcoWidget(QWidget *parent):
     m_diameterWidget(1),
     m_from(0.0),
     m_to(0.0),
+    m_qPixMapBackground(QPixmap(m_diameterWidget,m_diameterWidget)),
     m_icoType(IT_DrawCircle),
     m_mainQwidget(parent)
 {
@@ -17,33 +18,28 @@ IcoWidget::IcoWidget(QWidget *parent):
 }
 
 void IcoWidget::setFromTo(double from, double to){
-    m_from = RadianToGradus(from);
-    m_to = RadianToGradus(to);
-
-    RecountCoordWidget();
+    m_from = (int)(from * RADIAN_TO_GRADUS);
+    m_to = (int)(to * RADIAN_TO_GRADUS);
+    update();
 }
 
-void IcoWidget::setPositionForSecondary(qreal inputVal, int multiplier, qreal val){
-    const int minMultiply = 1;
-    const int maxMultiply = 20;
-
-    if (multiplier < minMultiply) multiplier = minMultiply;
-    if (multiplier > maxMultiply) multiplier = maxMultiply;
-
-    m_currentAngleArrow = inputVal * maxMultiply;
-    m_currentNumAngle = val;    
-
-    RecountCoordWidget();
+void IcoWidget::setPositionForSecondary(double inputVal, double valGradus){
+    m_currentAngleArrow = inputVal * RADIAN_TO_GRADUS;
+    m_currentNumAngle = valGradus;
+    update();
 }
 
 void IcoWidget::setIcoType(ICO_TYPE var){
     m_icoType = var;
+    update();
 }
 
 void IcoWidget::resizeEvent(QResizeEvent *e){
     this->resize(m_mainQwidget->width(),
                  m_mainQwidget->height());
     RecountCoordWidget();
+    UpdatePixmap();
+    update();
 }
 
 void IcoWidget::paintEvent(QPaintEvent *){
@@ -61,29 +57,67 @@ void IcoWidget::paintEvent(QPaintEvent *){
     }
 }
 
-void IcoWidget::DrawFullWidget(QPainter &painter){
+void IcoWidget::UpdatePixmap(){
+    m_qPixMapBackground = QPixmap(m_diameterWidget, m_diameterWidget);
+    m_qPixMapBackground.fill(Qt::black);
+    QPainter painter(&m_qPixMapBackground);
+
     DrawLayoutCircle(painter);
-    DrawGridSectorAngle(painter);
-    DrawArrow(painter);
-    DrawCurrentNumAngle(painter);
     DrawLayoutGradus(painter);
 }
 
+void IcoWidget::DrawFullWidget(QPainter &painter){
+    DrawPixmap(painter);
+    DrawGridSectorAngle(painter);
+    DrawArrow(painter);
+    DrawCurrentNumAngle(painter);
+}
+
 void IcoWidget::DrawLayoutCircle(QPainter &painter){
-    painter.setPen(QPen(QColor(50,75,50,255),1.0,Qt::SolidLine,Qt::RoundCap));
+    painter.setPen(QPen(QColor(50,75,50,255),
+                        1.0,
+                        Qt::SolidLine,
+                        Qt::RoundCap));
     painter.setRenderHint(QPainter::Antialiasing, true);
 
     QBrush br_c(QColor(30,60,30,75),Qt::SolidPattern);
     painter.setBrush(br_c);
-    painter.drawEllipse( m_translateWidthToCenterWidget,
-                         m_translateHeightToCenterWidget,
-                         m_diameterWidget,
-                         m_diameterWidget);
+    painter.drawEllipse( 0, 0, m_diameterWidget, m_diameterWidget );
+}
+
+void IcoWidget::DrawLayoutGradus(QPainter &painter){
+    const int offset = 10;
+    painter.setPen(QPen(QColor(20,255,20,255),
+                        0.9,
+                        Qt::SolidLine,
+                        Qt::RoundCap));
+
+    for (int i_line = 0; i_line < 360 ; i_line ++){
+        QMatrix myMatrixLines;
+        myMatrixLines.translate(m_diameterWidget/2,
+                                m_diameterWidget/2);
+        myMatrixLines.rotate(i_line);
+        painter.setWorldMatrix(myMatrixLines);
+        int lenI = 1;
+        if (!(i_line% 5) )  lenI = 4;
+        if (!(i_line% 15) )  lenI = 8;
+        if (!(i_line% 45) )  lenI = 15;
+        painter.drawLine(0,(m_diameterWidget/2 - offset) + lenI ,
+                         0,(m_diameterWidget/2 - offset));
+    }
+}
+
+void IcoWidget::DrawPixmap(QPainter &painter){
+    painter.drawPixmap(m_translateWidthToCenterWidget,
+                       m_translateHeightToCenterWidget,
+                       m_diameterWidget,
+                       m_diameterWidget,
+                       m_qPixMapBackground);
 }
 
 void IcoWidget::DrawGridSectorAngle(QPainter &painter){
-    const double offsetWidth = 0.01 * m_diameterWidget;  // 1% of full diameter
-    const double offsetHeight = 0.02 * m_diameterWidget; // 2% of full diameter
+    const double offsetWidth = 0.02 * m_diameterWidget;  // 2% of full diameter
+    const double offsetHeight = 0.04 * m_diameterWidget; // 4% of full diameter
     QRectF rectangle(offsetWidth + m_translateWidthToCenterWidget,
                      offsetWidth + m_translateHeightToCenterWidget,
                      m_diameterWidget - offsetHeight,
@@ -122,14 +156,12 @@ void IcoWidget::DrawArrow(QPainter &painter){
     painter.setPen(QPen(col3,0.9,Qt::SolidLine,Qt::RoundCap));
     QPolygon polygon1;
 
-    polygon1.putPoints( 0, 7,
-                        m_diameterWidget/2.15,0 ,
-                        4, 4,
-                        -2, 4,
-                        -4, 2,
-                        -4,-2,
-                        -2,-4,
-                        4,-4);
+
+    const int offset = 15;
+    polygon1.putPoints( 0, 7, m_diameterWidget/2 - offset, 0,
+                        4, 4, -2, 4,
+                        -4, 2,-4,-2,
+                        -2,-4, 4,-4);
 
     painter.drawPolygon(polygon1,Qt::WindingFill);
     QBrush br1(col4,Qt::SolidPattern);
@@ -140,7 +172,7 @@ void IcoWidget::DrawArrow(QPainter &painter){
 
 }
 
-void IcoWidget::DrawCurrentNumAngle(QPainter &painter/*, QString &str*/){
+void IcoWidget::DrawCurrentNumAngle(QPainter &painter){
     QFontMetrics fm(this->font());
     int hf = fm.height();
 
@@ -160,44 +192,24 @@ void IcoWidget::DrawCurrentNumAngle(QPainter &painter/*, QString &str*/){
                      "°"  + QString::number((int)d).rightJustified(2,'0',true) + "'");
 
     QFont font  = this->font();
-    const int old_p_size = font.pointSize();
-    font.setPointSize(125);
+//    const int old_p_size = font.pointSize();
+    font.setPointSize((int)(m_diameterWidget/6));
     painter.setFont(font);
     QFontMetrics fmBig(painter.font());
-    QBrush br_c_big(QColor(0,0,0,255),Qt::SolidPattern);
-    painter.setBrush(br_c_big);
+
+    const double offsetValue = 0.2;
+    painter.setBrush(QColor(0,0,0,200));
     painter.drawRoundedRect((m_diameterWidget / 2 + m_translateWidthToCenterWidget) - (fmBig.width(onlyVal)/2),
                             (m_diameterWidget / 2 + m_translateHeightToCenterWidget) - (fmBig.height()/2),
                              fmBig.width(onlyVal),fmBig.height(),20,20 );
     painter.drawText((m_diameterWidget / 2 + m_translateWidthToCenterWidget) - (fmBig.width(onlyVal)/2),
                      (m_diameterWidget / 2 + m_translateHeightToCenterWidget) + (fmBig.height()/2) -
-                     (fmBig.height() * 0.2) , onlyVal);
-
-    font.setPointSize(old_p_size);
-    painter.setFont(font);
-}
-
-void IcoWidget::DrawLayoutGradus(QPainter &painter){
-    QColor col3(20,255,20,255);
-    painter.setPen(QPen(col3,0.9,Qt::SolidLine,Qt::RoundCap));
-
-    for (int i_line = 0; i_line < 360 ; i_line ++){
-        QMatrix myMatrixLines;
-        myMatrixLines.translate(m_diameterWidget/2 + m_translateWidthToCenterWidget,
-                                m_diameterWidget/2 + m_translateHeightToCenterWidget);
-        myMatrixLines.rotate(i_line);
-        painter.setWorldMatrix(myMatrixLines);
-        int lenI = 1;
-        if (!(i_line% 5) )  lenI = 4;
-        if (!(i_line% 15) )  lenI = 8;
-        if (!(i_line% 45) )  lenI = 15;
-        painter.drawLine(0,(m_diameterWidget/2) + lenI ,
-                         0,(m_diameterWidget/2));
-    }
+                     (fmBig.height() * offsetValue) , onlyVal);
 }
 
 void IcoWidget::DrawPicture(QPainter &painter){
-    QPixmap pixmap1(":/res/ch_sw6.png");
+    QPixmap pixmap1("../resources/ch_sw6.png");
+
     painter.drawPixmap(m_translateWidthToCenterWidget,
                        m_translateHeightToCenterWidget,
                        m_diameterWidget,
@@ -229,18 +241,11 @@ void IcoWidget::RecountCoordWidget(){
     const int offset = 40;
     if(m_mainQwidget->width() > m_mainQwidget->height()){
         m_diameterWidget = m_mainQwidget->height() - offset;
-        m_translateWidthToCenterWidget = (m_mainQwidget->width() - m_diameterWidget) / 2;
-        m_translateHeightToCenterWidget = offset/2;
+        m_translateWidthToCenterWidget = (m_mainQwidget->width() - m_diameterWidget) / 2 ;
+        m_translateHeightToCenterWidget = offset / 2;
     } else {
         m_diameterWidget = m_mainQwidget->width() - offset;
-        m_translateHeightToCenterWidget = (m_mainQwidget->height() - m_diameterWidget)/2;
-        m_translateWidthToCenterWidget = offset/2;
+        m_translateHeightToCenterWidget = (m_mainQwidget->height() - m_diameterWidget) / 2;
+        m_translateWidthToCenterWidget = offset / 2;
     }
-//    if(m_from || m_to){
-//        update();
-//    }
-}
-
-int IcoWidget::RadianToGradus(double radian){
-    return (int)(radian * (180.0 / M_PI));
 }

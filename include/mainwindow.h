@@ -16,6 +16,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void updateFrame();
 private:
     void resizeEvent(QResizeEvent *e);
 
